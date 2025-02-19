@@ -1,2 +1,1 @@
-# iot-fall-alert-rescue-system
-iot-fall-alert-rescue-system
+# smart-watch-system-os
