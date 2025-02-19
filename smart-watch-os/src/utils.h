@@ -3,16 +3,16 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <DFRobot_I2C_Multiplexer.h>
-// #include <DFRobot_MAX30102.h>
-
-#include "display_manager.h"
-#include "fall_detector.h"
-#include "graph_plotter.h"
 
 #define CLEAR_STEP true
 #define NOT_CLEAR_STEP false
 
 #define OLED_RESET -1
+
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 32
+#define MARGIN 3
+#define SCREEN_ADDRESS 0x3C
 
 #define ACCELERATION_THRESHOLD 2.5
 #define CONSCIOUSNESS_CHECK_TIME 30000

@@ -1,8 +1,8 @@
 #pragma once
 
 #include <Arduino.h>
-
 #include "display_manager.h"
+#include "utils.h"
 
 class graph_plotter {
  private:

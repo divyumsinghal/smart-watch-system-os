@@ -1,4 +1,6 @@
-#include "src/utils.h"
+#include "src/fall_detector.h"
+#include "src/display_manager.h"
+#include "src/graph_plotter.h"
 
 fall_detector *fall_sensor;
 DFRobot_I2C_Multiplexer *Mux;

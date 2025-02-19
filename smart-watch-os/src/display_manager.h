@@ -6,13 +6,8 @@
 #include <DFRobot_I2C_Multiplexer.h>
 #include <SPI.h>
 #include <Wire.h>
-
 #include "utils.h"
 
-#define SCREEN_WIDTH 128
-#define SCREEN_HEIGHT 32
-#define MARGIN 3
-#define SCREEN_ADDRESS 0x3C
 
 class display_manager {
  private:
