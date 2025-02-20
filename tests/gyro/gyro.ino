@@ -1,6 +1,6 @@
-#include "fall_detector.h"
+#include "../../smart-watch-os/src/gyro_acc.h"
 
-fall_detector *fall_sensor;
+gyro_acc *gyroscope_accelerometer;
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
@@ -17,9 +17,9 @@ void setup() {
   Serial.println("Hello World!");
   Wire.begin();
 
-  fall_sensor = new fall_detector();
+  gyroscope_accelerometer = new gyro_acc(0);
 }
 
 bool fallen = false;
 
-void loop() { fallen = fall_sensor->has_fallen(); }
+void loop() { fallen = gyroscope_accelerometer->has_fallen(0); }

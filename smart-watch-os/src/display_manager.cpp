@@ -1,19 +1,20 @@
 #include "display_manager.h"
 
-display_manager::display_manager(uint8_t width, uint8_t height, TwoWire& Wire,
-                                 DFRobot_I2C_Multiplexer* Mux_main, int port)
-    : display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET),
-      Mux(Mux_main),
-      port_dis_man(port_dis_man) {}
+display_manager::display_manager(uint8_t width, uint8_t height, TwoWire& Wire)
+    : display(width, height, &Wire, OLED_RESET) {}
 
-void display_manager::begin() {
+void display_manager::begin(int port_dis_man) {
   Mux->selectPort(port_dis_man);
 
+  delay(100);
+
   while (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
-    Serial.println(F("SSD1306 allocation failed"));
+    Serial.println(F("SSD1306 allocation failed on "));
+    Serial.println(port_dis_man);
+    delay(2000);
   }
 
-  Serial.println("Display initialized");
+  Serial.println(F("Display initialized"));
 
   display.display();
   delay(2000);
@@ -31,14 +32,15 @@ void display_manager::begin() {
   display.print(message);
 
   display.display();
+  delay(2000);
 }
 
-void display_manager::clear() {
+void display_manager::clear(int port_dis_man) {
   Mux->selectPort(port_dis_man);
   display.clearDisplay();
 }
 
-void display_manager::draw_graph(int* graph_data) {
+void display_manager::draw_graph(uint8_t* graph_data, int port_dis_man) {
   Mux->selectPort(port_dis_man);
 
   for (int i = 0; i < SCREEN_WIDTH - 1; i++) {
@@ -51,7 +53,8 @@ void display_manager::draw_graph(int* graph_data) {
   }
 }
 
-void display_manager::print_info(unsigned long time, int value) {
+void display_manager::print_info(unsigned long time, int value,
+                                 int port_dis_man) {
   Mux->selectPort(port_dis_man);
 
   display.setCursor(0, SCREEN_HEIGHT - 10);
@@ -63,12 +66,12 @@ void display_manager::print_info(unsigned long time, int value) {
   display.print(value);
 }
 
-void display_manager::update() {
+void display_manager::update(int port_dis_man) {
   Mux->selectPort(port_dis_man);
   display.display();
 }
 
-void display_manager::need_help() {
+void display_manager::need_help(int port_dis_man) {
   Mux->selectPort(port_dis_man);
 
   display.clearDisplay();
